@@ -1,5 +1,5 @@
 ---
-title: "Laboratorio 2"
+title: "Informe Laboratorio 2: Paradigmas de programación"
 author: "Rodrigo Mardones"
 date: "29-06-2020"
 output: pdf_document
@@ -140,3 +140,9 @@ Al compararlo con el paradigma visto en el laboratorio anterior, resulta mucho m
 
 \newpage
 # Referencias 
+
+Para el desarrollo de este laboratorio se han consultado las siguientes fuentes bibliograficas:
+
+* Castel de Haro, M., & Llorens Largo, F. (2005). Practicas de logica (1.a ed., Vol. 1). Universidad de Alicante.
+* SWI-Prolog documentation. (s. f.). Documentacion Oficial de Prolog. https://www.swi-prolog.org/pldoc/index.html
+* Clocksin, W. F. (2003). Programming in Prolog: Using The Iso Standard (5th ed.). Springer.
