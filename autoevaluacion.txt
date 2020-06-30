@@ -1,0 +1,10 @@
+autoevluacion : 1
+implementacion en prolog: 1
+repositorio en git: 1
+informe: 1
+Swi-Prolog versión 8.x.x : 1
+gitInit : 1
+gitCommit: 1
+gitAdd: 1
+gitpush: 1
+git2String: 0.5
