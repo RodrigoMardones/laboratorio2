@@ -6,21 +6,56 @@
 % RepoIn = list
 % Archivos = list
 % Mensaje  = string
-
+% INDEX = list
+% LOCAL = list
+% REM = list
+% local = list
+% COMM = list
 %==============hechos=====================
 
+%indexZone(INDEX).
+%localRepo(LOCAL).
+%remoteRepo(REM).
+%commit(mensaje,INDEX,COMM).
+%repository(NOM,AU,CRAT,repoOut).
 %gitInit(NombreRepo,Autor,RepoOut).
 %gitAdd(RepoInput, Archivos, RepoOut).
 %gitCommit(RepoInput, Mensaje, RepoOutput).
 %gitPush(RepoIn,RepoOut).
 %git2String(RepoInput, RepoAsString).
 
+%============== metas =====================
+% ==== primarias ====
+
+% gitInit
+% gitAdd
+% gitCommit
+% gitPush
+% git2String
+
+% ==== Secundarias ====
+
+
 %=============clausulas====================
+%ZONAS 
+indexZone([]).
+localRepo([]).
+remoteRepo([]).
+
+%COMMIT
+commit(MSJ,INDEX,[MSJ, INDEX]).
 
 %GITINIT
-gitInit(NOM,AU,[NOM,AU,CRAT,[],[],[]]):-
-    get_time(X), 
-    convert_time(X,CRAT).
+repository(NOM,AU,CRAT,[NOM,AU,CRAT,INDEX,LOCAL,REM]):-
+    indexZone(INDEX),
+    localRepo(LOCAL),
+    remoteRepo(REM).
+
+gitInit(NOM,AU,RESULT):-
+    get_time(X),  
+    convert_time(X,CRAT),
+    repository(NOM,AU,CRAT,RESULT).
+    
 
 %GITADD
 gitAdd([NOM,AU,CRAT,INDEX,LOCAL,REM], [] ,[NOM,AU,CRAT,INDEX,LOCAL,REM]).
@@ -30,11 +65,14 @@ gitAdd([NOM,AU,CRAT,INDEX,LOCAL,REM], FILE ,[NOM,AU,CRAT,[FILE | INDEX], LOCAL, 
 %GITCOMMIT
 
 %caso sin elementos
-gitCommit([NOM,AU,CRAT,INDEX,[],REM],MSJ,[NOM,AU,CRAT,[],[[MSJ,INDEX]],REM]).
+gitCommit([NOM,AU,CRAT,INDEX,[],REM],MSJ,[NOM,AU,CRAT,[],COMM,REM]):-
+    commit(MSJ,INDEX,COMM).
 %caso con un elemento
-gitCommit([NOM,AU,CRAT,INDEX,[LOCAL],REM],MSJ,[NOM,AU,CRAT,[],[[MSJ, INDEX],LOCAL], REM]).
+gitCommit([NOM,AU,CRAT,INDEX,[LOCAL],REM],MSJ,[NOM,AU,CRAT,[],[COMM,LOCAL], REM]):-
+    commit(MSJ, INDEX, COMM).
 %caso con una lista de elementos
-gitCommit([NOM,AU,CRAT,INDEX,LOCAL,REM],MSJ,[NOM,AU,CRAT,[],[[MSJ,INDEX] | LOCAL],REM]).
+gitCommit([NOM,AU,CRAT,INDEX,LOCAL,REM],MSJ,[NOM,AU,CRAT,[],[COMM | LOCAL],REM]):-
+    commit(MSJ,INDEX,COMM).
 
 %GITPUSH
 
